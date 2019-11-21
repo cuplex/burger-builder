@@ -23,6 +23,7 @@ class BurgerBuilder extends Component {
     },
     totalPrice: 4,
     purchasable: false,
+    isPurchasing: false,
   };
 
   onAddIngredient = (type) => {
@@ -60,8 +61,15 @@ class BurgerBuilder extends Component {
     const sum = Object.keys(ingredients)
       .map(igKey => ingredients[igKey])
       .reduce((a, b) => a + b, 0);
-    console.log({sum});
     this.setState({ purchasable: sum > 0 })
+  }
+
+  onPurchase = () => {
+    this.setState({ isPurchasing: true });
+  
+  }
+  cancelOrder = () => {
+    this.setState({ isPurchasing: false });
   }
 
   // kept this to reuse
@@ -82,7 +90,7 @@ class BurgerBuilder extends Component {
     
     return (
       <Aux>
-        <Modal>
+        <Modal show={this.state.isPurchasing} click={this.cancelOrder}>
           <OrderSummary ingredients={this.state.ingredients} />
         </Modal>
         <Burger ingredients={this.state.ingredients}/>
@@ -92,6 +100,7 @@ class BurgerBuilder extends Component {
           isDisabled={disabledInfo}
           totalPrice={this.state.totalPrice}
           purchasable={this.state.purchasable}
+          purchase={this.onPurchase}
         />
       </Aux>
     );
