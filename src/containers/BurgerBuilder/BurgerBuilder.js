@@ -68,8 +68,13 @@ class BurgerBuilder extends Component {
     this.setState({ isPurchasing: true });
   
   }
+
   cancelOrder = () => {
     this.setState({ isPurchasing: false });
+  }
+
+  processOrder = () => {
+    alert('handle process order')
   }
 
   // kept this to reuse
@@ -91,7 +96,12 @@ class BurgerBuilder extends Component {
     return (
       <Aux>
         <Modal show={this.state.isPurchasing} click={this.cancelOrder}>
-          <OrderSummary ingredients={this.state.ingredients} />
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            continue={this.processOrder}
+            cancel={this.cancelOrder}
+            totalPrice={this.state.totalPrice}
+          />
         </Modal>
         <Burger ingredients={this.state.ingredients}/>
         <BuildControls 
