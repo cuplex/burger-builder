@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Aux from '../../hoc/Aux';
 import Button from '../UI/Button/Button';
 
-const OrderSummary = (props) => {
+const OrderSummary = (props) => {  
   const { ingredients, totalPrice } = props
   const orderSummary = Object.keys(ingredients)
     .map(igKey => {
@@ -12,6 +12,11 @@ const OrderSummary = (props) => {
         </li>
         )
     })
+  
+  useEffect(() => {
+    console.log('[OrderSummary.js] this is being updated');
+  })
+
   return (
     <Aux>
       <h3>Your order</h3>
