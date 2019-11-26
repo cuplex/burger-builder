@@ -13,7 +13,6 @@ class Modal extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    // console.log('[Modal.js] shouldComponentUpdate', {nextShow: nextProps.show, prevShow: this.props.show});
     return nextProps.show !== this.props.show
   }
 
